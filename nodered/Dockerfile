@@ -18,6 +18,7 @@ RUN npm install --no-update-notifier --no-audit --no-fund --omit=dev node-red-no
 
 COPY --chown=node-red:node-red package.json /data_defaults/package.json
 COPY --chown=node-red:node-red data/flows.json /data_defaults/flows.json
+COPY --chown=node-red:node-red data/settings.js /data_defaults/settings.js
 COPY --chown=node-red:node-red entrypoint.sh /entrypoint_custom.sh
 
 USER root

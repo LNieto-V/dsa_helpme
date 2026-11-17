@@ -35,10 +35,10 @@ podman pod rm -f dsa-ae3-pod >nul 2>nul
 podman pod create --name dsa-ae3-pod -p 1880:1880 -p 5020:5020 -p 5021:5021 -p 5022:5022
 
 echo [4/4] Iniciando los 2 contenedores ligeros dentro del Pod...
-podman run -d --name dsa_ae3_nodered --pod dsa-ae3-pod --log-opt max-size=5m -e NODE_OPTIONS=--max-old-space-size=192 -v "%CD%\nodered\data:/data:Z" dsa-ae3-nodered
+podman run -d --name dsa_ae3_nodered --pod dsa-ae3-pod --log-opt max-size=5m -e NODE_OPTIONS=--max-old-space-size=192 -v dsa_ae3_data:/data dsa-ae3-nodered
 podman run -d --name dsa_ae3_gemelo --pod dsa-ae3-pod --log-opt max-size=5m dsa-ae3-gemelo
 
-timeout /t 4 /nobreak >nul
+timeout /t 10 /nobreak >nul
 start http://localhost:1880
 start http://localhost:1880/dashboard
 
