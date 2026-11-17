@@ -218,7 +218,7 @@
     "onceDelay": "0.5",
     "payloadType": "date",
     "x": 120,
-    "y": 130,
+    "y": 100,
     "wires": [
       [
         "ae3_fn_init"
@@ -230,9 +230,9 @@
     "type": "function",
     "z": "ae3_tab",
     "name": "Valores iniciales",
-    "outputs": 6,
+    "outputs": 3,
     "x": 340,
-    "y": 130,
+    "y": 100,
     "wires": [
       [
         "ae3_lo_i_auto"
@@ -241,19 +241,10 @@
         "ae3_lo_i_remoto"
       ],
       [
-        "ae3_lo_i_paro"
-      ],
-      [
-        "ae3_lo_i_avance"
-      ],
-      [
-        "ae3_lo_i_ldr"
-      ],
-      [
         "ae3_lo_i_txtrem"
       ]
     ],
-    "func": "flow.set(\"auto\", true);\nflow.set(\"remoto\", false);\nflow.set(\"remoto_cnc\", null);\nflow.set(\"paro\", false);\nflow.set(\"avance\", 50);\nreturn [{ payload: true }, { payload: false }, { payload: 0 }, { payload: 50 }, { payload: 80 }, { payload: \"En LOCAL: active Modo Remoto para operar a distancia\" }];"
+    "func": "flow.set(\"auto\", true);\nflow.set(\"remoto\", false);\nflow.set(\"remoto_cnc\", null);\nflow.set(\"paro\", false);\nflow.set(\"avance\", 50);\nreturn [{ payload: true }, { payload: false }, { payload: \"En LOCAL: active Modo Remoto para operar a distancia\" }];"
   },
   {
     "id": "ae3_lo_i_auto",
@@ -265,7 +256,7 @@
       "ae3_li_i_auto"
     ],
     "x": 560,
-    "y": 50,
+    "y": 65,
     "wires": []
   },
   {
@@ -278,46 +269,7 @@
       "ae3_li_i_remoto"
     ],
     "x": 560,
-    "y": 82,
-    "wires": []
-  },
-  {
-    "id": "ae3_lo_i_paro",
-    "type": "link out",
-    "z": "ae3_tab",
-    "name": "init → Paro",
-    "mode": "link",
-    "links": [
-      "ae3_li_i_paro"
-    ],
-    "x": 560,
-    "y": 114,
-    "wires": []
-  },
-  {
-    "id": "ae3_lo_i_avance",
-    "type": "link out",
-    "z": "ae3_tab",
-    "name": "init → Avance",
-    "mode": "link",
-    "links": [
-      "ae3_li_i_avance"
-    ],
-    "x": 560,
-    "y": 146,
-    "wires": []
-  },
-  {
-    "id": "ae3_lo_i_ldr",
-    "type": "link out",
-    "z": "ae3_tab",
-    "name": "init → LDR",
-    "mode": "link",
-    "links": [
-      "ae3_li_i_ldr"
-    ],
-    "x": 560,
-    "y": 178,
+    "y": 100,
     "wires": []
   },
   {
@@ -330,7 +282,7 @@
       "ae3_li_txtrem"
     ],
     "x": 560,
-    "y": 210,
+    "y": 135,
     "wires": []
   },
   {
@@ -901,9 +853,9 @@
     "id": "ae3_c_3",
     "type": "comment",
     "z": "ae3_tab",
-    "name": "3. PANEL DE ÓRDENES Y SIMULACIÓN ESP32",
+    "name": "3. PANEL DE ÓRDENES",
     "info": "",
-    "x": 190,
+    "x": 145,
     "y": 1060,
     "wires": []
   },
@@ -931,7 +883,7 @@
     "label": "Control Automático (OFF = Manual)",
     "group": "ae3_ui_g_panel",
     "order": 1,
-    "width": 3,
+    "width": 6,
     "height": 1,
     "passthru": false,
     "onvalue": "true",
@@ -961,63 +913,6 @@
     "func": "flow.set(\"auto\", msg.payload === true);\nreturn null;"
   },
   {
-    "id": "ae3_li_i_paro",
-    "type": "link in",
-    "z": "ae3_tab",
-    "name": "← init",
-    "links": [
-      "ae3_lo_i_paro"
-    ],
-    "x": 70,
-    "y": 1170,
-    "wires": [
-      [
-        "ae3_ui_sw_paro"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_ui_sw_paro",
-    "type": "ui-switch",
-    "z": "ae3_tab",
-    "name": "Paro Emergencia",
-    "label": "Paro de Emergencia (HR2)",
-    "group": "ae3_ui_g_panel",
-    "order": 2,
-    "width": 3,
-    "height": 1,
-    "passthru": false,
-    "onvalue": "1",
-    "onvalueType": "num",
-    "offvalue": "0",
-    "offvalueType": "num",
-    "oncolor": "#c62828",
-    "x": 220,
-    "y": 1170,
-    "wires": [
-      [
-        "ae3_mb_w_sim_paro"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_mb_w_sim_paro",
-    "type": "modbus-write",
-    "z": "ae3_tab",
-    "name": "Simular Paro (ESP32 A HR2)",
-    "unitid": "1",
-    "dataType": "HoldingRegister",
-    "adr": "2",
-    "quantity": "1",
-    "server": "esp32_a_cli",
-    "x": 490,
-    "y": 1170,
-    "wires": [
-      [],
-      []
-    ]
-  },
-  {
     "id": "ae3_ui_sw_m_banda",
     "type": "ui-switch",
     "z": "ae3_tab",
@@ -1033,7 +928,7 @@
     "offvalue": "0",
     "offvalueType": "num",
     "x": 220,
-    "y": 1230,
+    "y": 1170,
     "wires": [
       [
         "ae3_fn_gate_banda"
@@ -1047,7 +942,7 @@
     "name": "Solo Manual",
     "outputs": 1,
     "x": 460,
-    "y": 1230,
+    "y": 1170,
     "wires": [
       [
         "ae3_lo_m_banda"
@@ -1065,7 +960,7 @@
       "ae3_li_banda"
     ],
     "x": 640,
-    "y": 1230,
+    "y": 1170,
     "wires": []
   },
   {
@@ -1084,7 +979,7 @@
     "offvalue": "0",
     "offvalueType": "num",
     "x": 220,
-    "y": 1290,
+    "y": 1230,
     "wires": [
       [
         "ae3_fn_gate_cnc"
@@ -1098,7 +993,7 @@
     "name": "Solo Manual",
     "outputs": 1,
     "x": 460,
-    "y": 1290,
+    "y": 1230,
     "wires": [
       [
         "ae3_lo_m_cnc"
@@ -1116,7 +1011,7 @@
       "ae3_li_cnc"
     ],
     "x": 640,
-    "y": 1290,
+    "y": 1230,
     "wires": []
   },
   {
@@ -1135,7 +1030,7 @@
     "offvalue": "0",
     "offvalueType": "num",
     "x": 220,
-    "y": 1350,
+    "y": 1290,
     "wires": [
       [
         "ae3_fn_gate_refri"
@@ -1149,7 +1044,7 @@
     "name": "Solo Manual",
     "outputs": 1,
     "x": 460,
-    "y": 1350,
+    "y": 1290,
     "wires": [
       [
         "ae3_lo_m_refri"
@@ -1167,122 +1062,8 @@
       "ae3_li_refri"
     ],
     "x": 640,
-    "y": 1350,
+    "y": 1290,
     "wires": []
-  },
-  {
-    "id": "ae3_li_i_avance",
-    "type": "link in",
-    "z": "ae3_tab",
-    "name": "← init",
-    "links": [
-      "ae3_lo_i_avance"
-    ],
-    "x": 70,
-    "y": 1410,
-    "wires": [
-      [
-        "ae3_ui_slider_avance"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_ui_slider_avance",
-    "type": "ui-slider",
-    "z": "ae3_tab",
-    "group": "ae3_ui_g_panel",
-    "name": "Avance %",
-    "label": "Velocidad Avance CNC % (ESP32 B HR0)",
-    "order": 9,
-    "width": 6,
-    "height": 1,
-    "passthru": false,
-    "outs": "end",
-    "min": 0,
-    "max": 100,
-    "step": 5,
-    "thumbLabel": true,
-    "x": 220,
-    "y": 1410,
-    "wires": [
-      [
-        "ae3_mb_w_sim_avance"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_mb_w_sim_avance",
-    "type": "modbus-write",
-    "z": "ae3_tab",
-    "name": "Simular Avance (ESP32 B HR0)",
-    "unitid": "1",
-    "dataType": "HoldingRegister",
-    "adr": "0",
-    "quantity": "1",
-    "server": "esp32_b_cli",
-    "x": 490,
-    "y": 1410,
-    "wires": [
-      [],
-      []
-    ]
-  },
-  {
-    "id": "ae3_li_i_ldr",
-    "type": "link in",
-    "z": "ae3_tab",
-    "name": "← init",
-    "links": [
-      "ae3_lo_i_ldr"
-    ],
-    "x": 70,
-    "y": 1470,
-    "wires": [
-      [
-        "ae3_ui_slider_ldr"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_ui_slider_ldr",
-    "type": "ui-slider",
-    "z": "ae3_tab",
-    "group": "ae3_ui_g_panel",
-    "name": "Luz LDR %",
-    "label": "Sensor Luz Banda % (ESP32 A HR0)",
-    "order": 10,
-    "width": 6,
-    "height": 1,
-    "passthru": false,
-    "outs": "end",
-    "min": 0,
-    "max": 100,
-    "step": 5,
-    "thumbLabel": true,
-    "x": 220,
-    "y": 1470,
-    "wires": [
-      [
-        "ae3_mb_w_sim_ldr"
-      ]
-    ]
-  },
-  {
-    "id": "ae3_mb_w_sim_ldr",
-    "type": "modbus-write",
-    "z": "ae3_tab",
-    "name": "Simular LDR (ESP32 A HR0)",
-    "unitid": "1",
-    "dataType": "HoldingRegister",
-    "adr": "0",
-    "quantity": "1",
-    "server": "esp32_a_cli",
-    "x": 490,
-    "y": 1470,
-    "wires": [
-      [],
-      []
-    ]
   },
   {
     "id": "ae3_c_4",

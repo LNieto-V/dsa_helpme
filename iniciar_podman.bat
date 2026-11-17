@@ -30,9 +30,9 @@ echo [2/4] Construyendo imágenes Alpine ^(Gemelo primero, Node-RED minimal con 
 podman build -t dsa-ae3-gemelo ./gemelo
 podman build -t dsa-ae3-nodered ./nodered
 
-echo [3/4] Creando Pod compartido "dsa-ae3-pod" ^(comparte 127.0.0.1 entre Node-RED, Gemelo y ESP32 Sim^)...
+echo [3/4] Creando Pod compartido "dsa-ae3-pod" ^(comparte 127.0.0.1 entre Node-RED y Gemelo^)...
 podman pod rm -f dsa-ae3-pod >nul 2>nul
-podman pod create --name dsa-ae3-pod -p 127.0.0.1:1880:1880 -p 127.0.0.1:5020:5020 -p 127.0.0.1:5021:5021 -p 127.0.0.1:5022:5022
+podman pod create --name dsa-ae3-pod -p 127.0.0.1:1880:1880 -p 127.0.0.1:5020:5020
 
 echo [4/4] Iniciando los 2 contenedores ligeros dentro del Pod...
 podman run -d --name dsa_ae3_nodered --pod dsa-ae3-pod --log-opt max-size=5m -e NODE_OPTIONS=--max-old-space-size=192 -v dsa_ae3_data:/data dsa-ae3-nodered

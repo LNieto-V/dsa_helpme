@@ -23,13 +23,10 @@ if not exist "nodered\data\node_modules\@flowfuse\node-red-dashboard" (
     echo [1/4] Nodos de Node-RED listos en nodered\data.
 )
 
-echo [2/4] Iniciando Gemelo Digital Planta 1 ^(Puerto 5020^)...
+echo [2/3] Iniciando Gemelo Digital Planta 1 ^(Puerto 5020^)...
 start "Gemelo Digital - Planta 1 (5020)" /MIN %PYTHON_CMD% gemelo\planta_gemela.py --planta 1 --puerto 5020 --dt 0.25 --vel 1.0
 
-echo [3/4] Iniciando Simulador Virtual de ESP32 A y B ^(Puertos 5021 y 5022^)...
-start "Simulador ESP32 A/B (5021/5022)" /MIN %PYTHON_CMD% gemelo\simulador_esp32.py --puerto-a 5021 --puerto-b 5022
-
-echo [4/4] Iniciando Node-RED en http://localhost:1880 y Dashboard en http://localhost:1880/dashboard ...
+echo [3/3] Iniciando Node-RED en http://127.0.0.1:1880 y Dashboard en http://127.0.0.1:1880/dashboard/ae3_planta1 ...
 timeout /t 3 /nobreak >nul
-start http://localhost:1880/dashboard
+start http://127.0.0.1:1880/dashboard/ae3_planta1
 call "%APPDATA%\npm\node-red.cmd" -u "%~dp0nodered\data" flows.json
