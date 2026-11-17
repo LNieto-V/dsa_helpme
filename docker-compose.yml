@@ -1,0 +1,49 @@
+services:
+  nodered:
+    build:
+      context: ./nodered
+      dockerfile: Dockerfile
+    container_name: dsa_ae3_nodered
+    restart: unless-stopped
+    ports:
+      - "${NODERED_PORT:-1880}:1880"
+      - "${GEMELO_PORT:-5020}:5020"
+      - "${ESP32A_SIM_PORT:-5021}:5021"
+      - "${ESP32B_SIM_PORT:-5022}:5022"
+    environment:
+      - TZ=America/Bogota
+      - NODE_RED_ENABLE_PROJECTS=false
+    volumes:
+      - ./nodered/data:/data
+
+  gemelo:
+    build:
+      context: ./gemelo
+      dockerfile: Dockerfile
+    container_name: dsa_ae3_gemelo
+    restart: unless-stopped
+    # Comparte la red con nodered para que 127.0.0.1:5020 funcione idéntico a las guías del curso
+    network_mode: "service:nodered"
+    depends_on:
+      - nodered
+    command: >
+      python -u planta_gemela.py
+      --planta ${PLANTA:-1}
+      --puerto 5020
+      --dt 0.25
+      --vel ${VELOCIDAD:-1.0}
+
+  esp32-sim:
+    build:
+      context: ./gemelo
+      dockerfile: Dockerfile
+    container_name: dsa_ae3_esp32_sim
+    restart: unless-stopped
+    # Comparte la red con nodered: ESP32 A en 127.0.0.1:5021 y ESP32 B en 127.0.0.1:5022
+    network_mode: "service:nodered"
+    depends_on:
+      - nodered
+    command: >
+      python -u simulador_esp32.py
+      --puerto-a 5021
+      --puerto-b 5022

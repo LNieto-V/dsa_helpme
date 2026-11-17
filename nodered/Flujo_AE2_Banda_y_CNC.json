@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ae2_tab",
+    "type": "tab",
+    "label": "AE2 - Banda y CNC",
+    "disabled": true,
+    "info": "Flujo exacto de AE2_Practica_A_Banda_CNC_Dia2.html (solo ESP32 A y B). Deshabilitado por defecto para no interferir con la pestaña 'Gemelo' del AE3; habilítalo si deseas probar solo AE2."
+  },
+  {
+    "id": "ae2_mb_read_a",
+    "type": "modbus-read",
+    "z": "ae2_tab",
+    "name": "Leer ESP32 A (HR0 LDR)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_a_cli",
+    "x": 160,
+    "y": 100,
+    "wires": [
+      [
+        "ae2_chg_banda"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae2_chg_banda",
+    "type": "change",
+    "z": "ae2_tab",
+    "name": "topic = banda",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "banda",
+        "tot": "str"
+      }
+    ],
+    "x": 380,
+    "y": 100,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_mb_read_b",
+    "type": "modbus-read",
+    "z": "ae2_tab",
+    "name": "Leer ESP32 B (HR0 Avance)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_b_cli",
+    "x": 170,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_chg_avance"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae2_chg_avance",
+    "type": "change",
+    "z": "ae2_tab",
+    "name": "topic = avance",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "avance",
+        "tot": "str"
+      }
+    ],
+    "x": 380,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_inj_tick",
+    "type": "inject",
+    "z": "ae2_tab",
+    "name": "Reloj 0.5s (tick)",
+    "repeat": "0.5",
+    "once": true,
+    "onceDelay": "0.5",
+    "topic": "tick",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 220,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_fn_secuencia",
+    "type": "function",
+    "z": "ae2_tab",
+    "name": "Secuencia AE2 (Banda 3s -> CNC 2s+avance/10)",
+    "func": "let estado = flow.get(\"celda_ae2\") || {\n    fase: \"reposo\", avance: 50, inicioFase: null, duracionCNC: 0,\n    piezasTerminadas: 0, alarma: false\n};\n\nif (msg.topic === \"banda\") {\n    let luz = Number(msg.payload);\n    if (estado.fase === \"reposo\" && Number.isFinite(luz) && luz < 40) {\n        estado.fase = \"enBanda\";\n        estado.inicioFase = Date.now();\n    }\n} else if (msg.topic === \"avance\") {\n    let v = Number(msg.payload);\n    if (Number.isFinite(v)) estado.avance = v;\n} else if (msg.topic === \"tick\") {\n    let ahora = Date.now();\n    if (estado.fase === \"enBanda\" && ahora - estado.inicioFase >= 3000) {\n        estado.fase = \"enCNC\";\n        estado.inicioFase = ahora;\n        estado.duracionCNC = 2000 + (estado.avance / 10) * 1000;\n    } else if (estado.fase === \"enCNC\" && ahora - estado.inicioFase >= estado.duracionCNC) {\n        estado.fase = \"reposo\";\n        estado.piezasTerminadas++;\n        estado.inicioFase = null;\n    }\n    estado.alarma = estado.fase === \"enCNC\" && (ahora - estado.inicioFase >= 12000);\n}\n\nflow.set(\"celda_ae2\", estado);\n\nreturn [\n    { payload: estado.fase === \"enBanda\" ? 1 : 0 },\n    { payload: estado.fase === \"enCNC\" ? 1 : 0 },\n    { payload: `Fase: ${estado.fase} | Banda: ${estado.fase === \"enBanda\" ? \"ON\" : \"OFF\"} | CNC: ${estado.fase === \"enCNC\" ? \"ON\" : \"OFF\"} | Avance: ${estado.avance}% | Piezas: ${estado.piezasTerminadas} | Alarma: ${estado.alarma ? \"ATASCO (>12s)\" : \"Normal\"}` }\n];",
+    "outputs": 3,
+    "x": 650,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_mb_w_a"
+      ],
+      [
+        "ae2_mb_w_b"
+      ],
+      [
+        "ae2_dbg",
+        "ae2_ui_txt"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_mb_w_a",
+    "type": "modbus-write",
+    "z": "ae2_tab",
+    "name": "Escribir LED Banda (ESP32 A HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_a_cli",
+    "x": 960,
+    "y": 100,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae2_mb_w_b",
+    "type": "modbus-write",
+    "z": "ae2_tab",
+    "name": "Escribir LED CNC (ESP32 B HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_b_cli",
+    "x": 950,
+    "y": 160,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae2_dbg",
+    "type": "debug",
+    "z": "ae2_tab",
+    "name": "Debug AE2",
+    "active": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 910,
+    "y": 220,
+    "wires": []
+  },
+  {
+    "id": "ae2_ui_grp",
+    "type": "ui-group",
+    "name": "AE2 · Banda y CNC",
+    "page": "ae3_ui_page",
+    "width": 6,
+    "height": 1,
+    "order": 5,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "ae2_ui_txt",
+    "type": "ui-text",
+    "z": "ae2_tab",
+    "group": "ae2_ui_grp",
+    "order": 1,
+    "width": 6,
+    "height": 1,
+    "name": "Estado AE2",
+    "label": "Secuencia AE2",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 910,
+    "y": 260,
+    "wires": []
+  }
+]

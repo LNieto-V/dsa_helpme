@@ -1,0 +1,11 @@
+{
+  "name": "dsa-ae3-nodered",
+  "description": "Entorno Node-RED preconfigurado para AE3 - Planta 1 (Banda y CNC)",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@flowfuse/node-red-dashboard": "^1.29.0",
+    "node-red-contrib-modbus": "^5.43.0",
+    "node-red-node-sqlite": "^1.1.1"
+  }
+}

@@ -1,0 +1,2332 @@
+[
+  {
+    "id": "g7p1_cli",
+    "type": "modbus-client",
+    "name": "Gemelo planta 1",
+    "clienttype": "tcp",
+    "bufferCommands": true,
+    "stateLogEnabled": false,
+    "queueLogEnabled": false,
+    "failureLogEnabled": true,
+    "tcpHost": "127.0.0.1",
+    "tcpPort": "5020",
+    "tcpType": "DEFAULT",
+    "serialPort": "/dev/ttyUSB",
+    "serialType": "RTU-BUFFERD",
+    "serialBaudrate": "9600",
+    "serialDatabits": "8",
+    "serialStopbits": "1",
+    "serialParity": "none",
+    "serialConnectionDelay": "100",
+    "serialAsciiResponseStartDelimiter": "0x3A",
+    "unit_id": "1",
+    "commandDelay": "1",
+    "clientTimeout": "1000",
+    "reconnectOnTimeout": true,
+    "reconnectTimeout": "2000",
+    "parallelUnitIdsAllowed": true,
+    "showErrors": false,
+    "showWarnings": true,
+    "showLogs": true
+  },
+  {
+    "id": "g7p1_ui_tab_base",
+    "type": "ui-base",
+    "name": "Mi planta",
+    "path": "/dashboard",
+    "appIcon": "",
+    "includeClientData": true,
+    "acceptsClientConfig": [
+      "ui-notification",
+      "ui-control"
+    ],
+    "showPathInSidebar": false,
+    "navigationStyle": "default",
+    "titleBarStyle": "default",
+    "showReconnectNotification": true,
+    "notificationDisplayTime": 1,
+    "showDisconnectNotification": true,
+    "allowInstall": false
+  },
+  {
+    "id": "g7p1_ui_tab_theme",
+    "type": "ui-theme",
+    "name": "Tema",
+    "colors": {
+      "surface": "#fcfcfd",
+      "primary": "#0d74ce",
+      "bgPage": "#f9f9fb",
+      "groupBg": "#ffffff",
+      "groupOutline": "#d9d9e0"
+    },
+    "sizes": {
+      "density": "default",
+      "pagePadding": "12px",
+      "groupGap": "12px",
+      "groupBorderRadius": "4px",
+      "widgetGap": "12px"
+    }
+  },
+  {
+    "id": "ae3_tab",
+    "type": "tab",
+    "label": "Gemelo",
+    "disabled": false,
+    "info": "Flujo AE3 Planta 1 (Banda y CNC)"
+  },
+  {
+    "id": "esp32_a_cli",
+    "type": "modbus-client",
+    "name": "ESP32 A",
+    "clienttype": "tcp",
+    "bufferCommands": true,
+    "tcpHost": "127.0.0.1",
+    "tcpPort": "5021",
+    "tcpType": "DEFAULT",
+    "unit_id": "1",
+    "commandDelay": "1",
+    "clientTimeout": "1000",
+    "reconnectOnTimeout": true,
+    "reconnectTimeout": "2000",
+    "parallelUnitIdsAllowed": true
+  },
+  {
+    "id": "esp32_b_cli",
+    "type": "modbus-client",
+    "name": "ESP32 B",
+    "clienttype": "tcp",
+    "bufferCommands": true,
+    "tcpHost": "127.0.0.1",
+    "tcpPort": "5022",
+    "tcpType": "DEFAULT",
+    "unit_id": "1",
+    "commandDelay": "1",
+    "clientTimeout": "1000",
+    "reconnectOnTimeout": true,
+    "reconnectTimeout": "2000",
+    "parallelUnitIdsAllowed": true
+  },
+  {
+    "id": "ae3_sqlite_db",
+    "type": "sqlitedb",
+    "db": "planta.db",
+    "mode": "RWC"
+  },
+  {
+    "id": "ae3_ui_page",
+    "type": "ui-page",
+    "name": "Mi planta",
+    "ui": "g7p1_ui_tab_base",
+    "path": "/ae3_planta1",
+    "icon": "dashboard",
+    "layout": "grid",
+    "theme": "g7p1_ui_tab_theme",
+    "order": 1,
+    "visible": "true",
+    "disabled": "false",
+    "breakpoints": [
+      {
+        "name": "Default",
+        "px": "0",
+        "cols": "3"
+      },
+      {
+        "name": "Tablet",
+        "px": "576",
+        "cols": "6"
+      },
+      {
+        "name": "Small Desktop",
+        "px": "768",
+        "cols": "9"
+      },
+      {
+        "name": "Desktop",
+        "px": "1024",
+        "cols": "12"
+      }
+    ]
+  },
+  {
+    "id": "ae3_ui_g_sensores",
+    "type": "ui-group",
+    "name": "Sensores",
+    "page": "ae3_ui_page",
+    "width": 6,
+    "height": 1,
+    "order": 1,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "ae3_ui_g_panel",
+    "type": "ui-group",
+    "name": "Órdenes",
+    "page": "ae3_ui_page",
+    "width": 6,
+    "height": 1,
+    "order": 2,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "ae3_ui_g_teleop",
+    "type": "ui-group",
+    "name": "Teleoperación",
+    "page": "ae3_ui_page",
+    "width": 6,
+    "height": 1,
+    "order": 3,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "ae3_ui_g_mant",
+    "type": "ui-group",
+    "name": "Mantenimiento",
+    "page": "ae3_ui_page",
+    "width": 6,
+    "height": 1,
+    "order": 4,
+    "showTitle": true,
+    "visible": "true",
+    "disabled": "false",
+    "groupType": "default"
+  },
+  {
+    "id": "ae3_c_0",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "0. INICIO Y VALORES POR DEFECTO",
+    "info": "",
+    "x": 170,
+    "y": 40,
+    "wires": []
+  },
+  {
+    "id": "ae3_inj_init",
+    "type": "inject",
+    "z": "ae3_tab",
+    "name": "Inicio",
+    "once": true,
+    "onceDelay": "0.5",
+    "payloadType": "date",
+    "x": 120,
+    "y": 130,
+    "wires": [
+      [
+        "ae3_fn_init"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_init",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Valores iniciales",
+    "outputs": 6,
+    "x": 340,
+    "y": 130,
+    "wires": [
+      [
+        "ae3_lo_i_auto"
+      ],
+      [
+        "ae3_lo_i_remoto"
+      ],
+      [
+        "ae3_lo_i_paro"
+      ],
+      [
+        "ae3_lo_i_avance"
+      ],
+      [
+        "ae3_lo_i_ldr"
+      ],
+      [
+        "ae3_lo_i_txtrem"
+      ]
+    ],
+    "func": "flow.set(\"auto\", true);\nflow.set(\"remoto\", false);\nflow.set(\"remoto_cnc\", null);\nflow.set(\"paro\", false);\nflow.set(\"avance\", 50);\nreturn [{ payload: true }, { payload: false }, { payload: 0 }, { payload: 50 }, { payload: 80 }, { payload: \"En LOCAL: active Modo Remoto para operar a distancia\" }];"
+  },
+  {
+    "id": "ae3_lo_i_auto",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → Auto",
+    "mode": "link",
+    "links": [
+      "ae3_li_i_auto"
+    ],
+    "x": 560,
+    "y": 50,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_i_remoto",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → Remoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_i_remoto"
+    ],
+    "x": 560,
+    "y": 82,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_i_paro",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → Paro",
+    "mode": "link",
+    "links": [
+      "ae3_li_i_paro"
+    ],
+    "x": 560,
+    "y": 114,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_i_avance",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → Avance",
+    "mode": "link",
+    "links": [
+      "ae3_li_i_avance"
+    ],
+    "x": 560,
+    "y": 146,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_i_ldr",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → LDR",
+    "mode": "link",
+    "links": [
+      "ae3_li_i_ldr"
+    ],
+    "x": 560,
+    "y": 178,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_i_txtrem",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "init → TxtRemoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_txtrem"
+    ],
+    "x": 560,
+    "y": 210,
+    "wires": []
+  },
+  {
+    "id": "ae3_c_1",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "1. LECTURA MODBUS Y SENSORES (500 ms)",
+    "info": "",
+    "x": 190,
+    "y": 260,
+    "wires": []
+  },
+  {
+    "id": "ae3_mb_read_gemelo",
+    "type": "modbus-read",
+    "z": "ae3_tab",
+    "name": "Leer Gemelo",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "16",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "g7p1_cli",
+    "x": 140,
+    "y": 340,
+    "wires": [
+      [
+        "ae3_fn_escalar"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae3_mb_read_esp32a",
+    "type": "modbus-read",
+    "z": "ae3_tab",
+    "name": "Leer ESP32 A",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "3",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_a_cli",
+    "x": 140,
+    "y": 415,
+    "wires": [
+      [
+        "ae3_fn_panel_a"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae3_fn_panel_a",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Guardar ESP32 A",
+    "outputs": 1,
+    "x": 360,
+    "y": 415,
+    "wires": [
+      []
+    ],
+    "func": "const r = msg.payload.data || msg.payload;\nif (Array.isArray(r) && r.length >= 3) { flow.set(\"ldr\", Number(r[0])); flow.set(\"paro\", Number(r[2]) === 1); }\nreturn null;"
+  },
+  {
+    "id": "ae3_mb_read_esp32b",
+    "type": "modbus-read",
+    "z": "ae3_tab",
+    "name": "Leer ESP32 B",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_b_cli",
+    "x": 140,
+    "y": 475,
+    "wires": [
+      [
+        "ae3_fn_panel_b"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae3_fn_panel_b",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Guardar Avance",
+    "outputs": 1,
+    "x": 360,
+    "y": 475,
+    "wires": [
+      []
+    ],
+    "func": "const r = msg.payload.data || msg.payload;\nif (Array.isArray(r) && r.length >= 1) flow.set(\"avance\", Number(r[0]));\nreturn null;"
+  },
+  {
+    "id": "ae3_fn_escalar",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Escalar sensores",
+    "outputs": 1,
+    "x": 360,
+    "y": 340,
+    "wires": [
+      [
+        "ae3_ui_gauge_pos",
+        "ae3_ui_gauge_temp",
+        "ae3_ui_chart",
+        "ae3_fn_dig",
+        "ae3_lo_sensores"
+      ]
+    ],
+    "func": "const r = msg.payload.data || msg.payload;\nlet s = {};\ns.pos_pieza_pct     = Math.round((r[0] * 100 / 4095) * 100) / 100;\ns.temp_husillo_C    = Math.round((r[1] * 120 / 4095) * 100) / 100;\ns.vibracion_mm_s    = Math.round((r[2] * 10  / 4095) * 100) / 100;\ns.corriente_banda_A = Math.round((r[3] * 5   / 4095) * 100) / 100;\ns.ciclo_hr7       = r[7];\ns.sensor_entrada  = r[8];\ns.sensor_cnc      = r[9];\ns.pieza_terminada = r[10];\n\nflow.set(\"sensores\", s);\nflow.set(\"ultimo_hr7_ts\", Date.now());\nmsg.payload = s;\nreturn msg;"
+  },
+  {
+    "id": "ae3_ui_gauge_pos",
+    "type": "ui-gauge",
+    "z": "ae3_tab",
+    "name": "Posición en Banda",
+    "title": "Posición en Banda",
+    "group": "ae3_ui_g_sensores",
+    "order": 1,
+    "value": "payload.pos_pieza_pct",
+    "valueType": "msg",
+    "width": 3,
+    "height": 3,
+    "gtype": "gauge-34",
+    "gstyle": "needle",
+    "units": "%",
+    "suffix": "%",
+    "prefix": "",
+    "min": 0,
+    "max": "100",
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "alwaysShowTitle": false,
+    "floatingTitlePosition": "top-left",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#5cd65c",
+        "text": "",
+        "textType": "label"
+      },
+      {
+        "from": "80",
+        "color": "#0d74ce",
+        "text": "",
+        "textType": "label"
+      }
+    ],
+    "x": 640,
+    "y": 285,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_gauge_temp",
+    "type": "ui-gauge",
+    "z": "ae3_tab",
+    "name": "Temp. Husillo CNC",
+    "title": "Temp. Husillo CNC",
+    "group": "ae3_ui_g_sensores",
+    "order": 2,
+    "value": "payload.temp_husillo_C",
+    "valueType": "msg",
+    "width": 3,
+    "height": 3,
+    "gtype": "gauge-34",
+    "gstyle": "needle",
+    "units": "°C",
+    "suffix": " °C",
+    "prefix": "",
+    "min": 0,
+    "max": "120",
+    "sizeThickness": 16,
+    "sizeGap": 4,
+    "sizeKeyThickness": 8,
+    "styleRounded": true,
+    "styleGlow": false,
+    "alwaysShowTitle": false,
+    "floatingTitlePosition": "top-left",
+    "segments": [
+      {
+        "from": "0",
+        "color": "#5cd65c",
+        "text": "",
+        "textType": "label"
+      },
+      {
+        "from": "55",
+        "color": "#ffc800",
+        "text": "",
+        "textType": "label"
+      },
+      {
+        "from": "65",
+        "color": "#ea5353",
+        "text": "",
+        "textType": "label"
+      }
+    ],
+    "x": 640,
+    "y": 335,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_chart",
+    "type": "ui-chart",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "name": "Gráfica Temperatura",
+    "label": "Temperatura del Husillo (°C)",
+    "order": 3,
+    "chartType": "line",
+    "category": "temp_husillo_C",
+    "categoryType": "str",
+    "xAxisPropertyType": "timestamp",
+    "xAxisType": "time",
+    "yAxisProperty": "payload.temp_husillo_C",
+    "yAxisPropertyType": "msg",
+    "ymin": "20",
+    "ymax": "90",
+    "action": "append",
+    "pointShape": "circle",
+    "pointRadius": 3,
+    "showLegend": false,
+    "removeOlder": "3",
+    "removeOlderUnit": "60",
+    "colors": [
+      "#1f77b4"
+    ],
+    "width": 6,
+    "height": 3,
+    "interpolation": "linear",
+    "x": 640,
+    "y": 385,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ae3_fn_dig",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Texto sensores",
+    "outputs": 1,
+    "x": 640,
+    "y": 435,
+    "wires": [
+      [
+        "ae3_ui_txt_dig"
+      ]
+    ],
+    "func": "const s = msg.payload;\nmsg.payload = `Entrada: ${s.sensor_entrada} | CNC: ${s.sensor_cnc} | Salida: ${s.pieza_terminada} | Vib: ${s.vibracion_mm_s.toFixed(1)} mm/s`;\nreturn msg;"
+  },
+  {
+    "id": "ae3_ui_txt_dig",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "order": 6,
+    "width": 6,
+    "height": 1,
+    "name": "Sensores de Celda",
+    "label": "Sensores de Celda",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 890,
+    "y": 435,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_sensores",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "Sensores → Control / Alarma",
+    "mode": "link",
+    "links": [
+      "ae3_li_sens_ctrl",
+      "ae3_li_sens_alm"
+    ],
+    "x": 640,
+    "y": 485,
+    "wires": []
+  },
+  {
+    "id": "ae3_c_2",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "2. CONTROL AUTOMÁTICO Y SALIDAS MODBUS",
+    "info": "",
+    "x": 190,
+    "y": 540,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_sens_ctrl",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Sensores",
+    "links": [
+      "ae3_lo_sensores"
+    ],
+    "x": 120,
+    "y": 740,
+    "wires": [
+      [
+        "ae3_fn_control"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_control",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Control",
+    "outputs": 7,
+    "x": 320,
+    "y": 740,
+    "wires": [
+      [
+        "ae3_mb_w_banda",
+        "ae3_mb_w_led_a"
+      ],
+      [
+        "ae3_mb_w_cnc",
+        "ae3_mb_w_led_b"
+      ],
+      [
+        "ae3_mb_w_refri"
+      ],
+      [
+        "ae3_ui_txt_estado_ctrl"
+      ],
+      [
+        "ae3_ui_txt_piezas"
+      ],
+      [
+        "ae3_ui_txt_leda"
+      ],
+      [
+        "ae3_ui_txt_ledb"
+      ]
+    ],
+    "func": "const s = msg.payload;\nconst ahora = Date.now();\nconst auto = flow.get(\"auto\") !== false;\nconst paro = flow.get(\"paro\") === true;\nconst avance = Number(flow.get(\"avance\") ?? 50);\nconst ldr = Number(flow.get(\"ldr\") ?? 80);\nconst remotoCnc = flow.get(\"remoto_cnc\"); // null=sin override, 1=forzar ON, 0=forzar OFF\n\nlet c = context.get(\"c\") || { fase: \"espera\", t0: 0, dur: 7000, piezas: 0, prev: 0 };\nif (s.pieza_terminada === 1 && c.prev === 0) c.piezas++;\nc.prev = s.pieza_terminada;\n\n// Histéresis de refrigeración (55 / 42 °C)\nlet refri = context.get(\"refri\") || false;\nif (s.temp_husillo_C > 55) refri = true;\nelse if (s.temp_husillo_C < 42) refri = false;\ncontext.set(\"refri\", refri);\n\nlet banda = 0, cnc = 0;\nif (paro || s.temp_husillo_C > 72) {\n    c.fase = \"paro\";\n} else if (remotoCnc !== null && remotoCnc !== undefined && flow.get(\"remoto\") === true) {\n    // Mando remoto activo desde Teleoperación\n    cnc = remotoCnc;\n} else if (auto) {\n    if (s.sensor_cnc === 1) {\n        if (c.fase !== \"cnc\" && c.fase !== \"fin\") { c.fase = \"cnc\"; c.t0 = ahora; c.dur = 2000 + avance * 100; }\n        if (c.fase === \"cnc\") { if (ahora - c.t0 < c.dur) cnc = 1; else c.fase = \"fin\"; }\n    } else if (s.sensor_entrada === 1 || (s.pos_pieza_pct > 0 && s.pos_pieza_pct < 100) || ldr < 40) {\n        c.fase = \"banda\"; banda = 1;\n    } else {\n        c.fase = \"espera\";\n    }\n}\ncontext.set(\"c\", c);\nflow.set(\"cnc_on\", cnc === 1);\n\nlet alarma = \"Normal\";\nif (paro) alarma = \"PARO\";\nelse if (s.temp_husillo_C > 72) alarma = \"HH (muy alta)\";\nelse if (c.fase === \"cnc\" && ahora - c.t0 > 12000) alarma = \"ATASCO\";\nelse if (s.temp_husillo_C > 65) alarma = \"H (alta)\";\n\nconst txtEstado = { payload: `temp: ${s.temp_husillo_C.toFixed(1)} °C | refri: ${refri ? \"ON\" : \"OFF\"} | ${alarma}` };\nconst txtPiezas = { payload: `${c.piezas} (t = ${(2 + avance / 10).toFixed(1)} s)` };\nconst txtLedA   = { payload: banda ? \"ENCENDIDO\" : \"APAGADO\" };\nconst txtLedB   = { payload: cnc ? \"ENCENDIDO\" : \"APAGADO\" };\n\nif (!auto && !paro && (remotoCnc === null || remotoCnc === undefined)) return [null, null, null, txtEstado, txtPiezas, txtLedA, txtLedB];\nreturn [{ payload: banda }, { payload: cnc }, { payload: refri ? 1 : 0 }, txtEstado, txtPiezas, txtLedA, txtLedB];"
+  },
+  {
+    "id": "ae3_li_banda",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Banda",
+    "links": [
+      "ae3_lo_m_banda"
+    ],
+    "x": 490,
+    "y": 610,
+    "wires": [
+      [
+        "ae3_mb_w_banda",
+        "ae3_mb_w_led_a"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_li_cnc",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← CNC",
+    "links": [
+      "ae3_lo_m_cnc",
+      "ae3_lo_rem_cnc1",
+      "ae3_lo_rem_cnc0"
+    ],
+    "x": 490,
+    "y": 715,
+    "wires": [
+      [
+        "ae3_mb_w_cnc",
+        "ae3_mb_w_led_b"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_li_refri",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Refri",
+    "links": [
+      "ae3_lo_m_refri"
+    ],
+    "x": 490,
+    "y": 800,
+    "wires": [
+      [
+        "ae3_mb_w_refri"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_mb_w_banda",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "motor_banda (HR16)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "16",
+    "quantity": "1",
+    "server": "g7p1_cli",
+    "x": 700,
+    "y": 585,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_mb_w_led_a",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "ESP32 A LED (HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_a_cli",
+    "x": 700,
+    "y": 640,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_mb_w_cnc",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "cnc_on (HR17)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "17",
+    "quantity": "1",
+    "server": "g7p1_cli",
+    "x": 700,
+    "y": 695,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_mb_w_led_b",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "ESP32 B LED (HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_b_cli",
+    "x": 700,
+    "y": 750,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_mb_w_refri",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "refrigeracion (HR18)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "18",
+    "quantity": "1",
+    "server": "g7p1_cli",
+    "x": 700,
+    "y": 805,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_ui_txt_estado_ctrl",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "order": 4,
+    "width": 6,
+    "height": 1,
+    "name": "Estado del Control",
+    "label": "Estado del Control",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 700,
+    "y": 860,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_txt_piezas",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_panel",
+    "order": 8,
+    "width": 3,
+    "height": 1,
+    "name": "Piezas Terminadas",
+    "label": "Piezas Terminadas",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 700,
+    "y": 905,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_txt_leda",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_panel",
+    "order": 4,
+    "width": 3,
+    "height": 1,
+    "name": "LED Banda",
+    "label": "LED Banda (ESP32 A)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 700,
+    "y": 950,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_txt_ledb",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_panel",
+    "order": 6,
+    "width": 3,
+    "height": 1,
+    "name": "LED CNC",
+    "label": "LED CNC (ESP32 B)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 700,
+    "y": 995,
+    "wires": []
+  },
+  {
+    "id": "ae3_c_3",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "3. PANEL DE ÓRDENES Y SIMULACIÓN ESP32",
+    "info": "",
+    "x": 190,
+    "y": 1060,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_i_auto",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← init",
+    "links": [
+      "ae3_lo_i_auto"
+    ],
+    "x": 70,
+    "y": 1110,
+    "wires": [
+      [
+        "ae3_ui_sw_auto"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_sw_auto",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "Control Automático",
+    "label": "Control Automático (OFF = Manual)",
+    "group": "ae3_ui_g_panel",
+    "order": 1,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "oncolor": "#2e7d32",
+    "x": 220,
+    "y": 1110,
+    "wires": [
+      [
+        "ae3_fn_set_auto"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_set_auto",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Guardar Auto",
+    "outputs": 1,
+    "x": 460,
+    "y": 1110,
+    "wires": [
+      []
+    ],
+    "func": "flow.set(\"auto\", msg.payload === true);\nreturn null;"
+  },
+  {
+    "id": "ae3_li_i_paro",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← init",
+    "links": [
+      "ae3_lo_i_paro"
+    ],
+    "x": 70,
+    "y": 1170,
+    "wires": [
+      [
+        "ae3_ui_sw_paro"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_sw_paro",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "Paro Emergencia",
+    "label": "Paro de Emergencia (HR2)",
+    "group": "ae3_ui_g_panel",
+    "order": 2,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "1",
+    "onvalueType": "num",
+    "offvalue": "0",
+    "offvalueType": "num",
+    "oncolor": "#c62828",
+    "x": 220,
+    "y": 1170,
+    "wires": [
+      [
+        "ae3_mb_w_sim_paro"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_mb_w_sim_paro",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "Simular Paro (ESP32 A HR2)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "2",
+    "quantity": "1",
+    "server": "esp32_a_cli",
+    "x": 490,
+    "y": 1170,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_ui_sw_m_banda",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "Banda Manual",
+    "label": "Banda Manual (HR16)",
+    "group": "ae3_ui_g_panel",
+    "order": 3,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "1",
+    "onvalueType": "num",
+    "offvalue": "0",
+    "offvalueType": "num",
+    "x": 220,
+    "y": 1230,
+    "wires": [
+      [
+        "ae3_fn_gate_banda"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_gate_banda",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Solo Manual",
+    "outputs": 1,
+    "x": 460,
+    "y": 1230,
+    "wires": [
+      [
+        "ae3_lo_m_banda"
+      ]
+    ],
+    "func": "if (flow.get(\"auto\") || flow.get(\"paro\")) return null;\nreturn msg;"
+  },
+  {
+    "id": "ae3_lo_m_banda",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ Banda",
+    "mode": "link",
+    "links": [
+      "ae3_li_banda"
+    ],
+    "x": 640,
+    "y": 1230,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_sw_m_cnc",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "CNC Manual",
+    "label": "CNC Manual (HR17)",
+    "group": "ae3_ui_g_panel",
+    "order": 5,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "1",
+    "onvalueType": "num",
+    "offvalue": "0",
+    "offvalueType": "num",
+    "x": 220,
+    "y": 1290,
+    "wires": [
+      [
+        "ae3_fn_gate_cnc"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_gate_cnc",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Solo Manual",
+    "outputs": 1,
+    "x": 460,
+    "y": 1290,
+    "wires": [
+      [
+        "ae3_lo_m_cnc"
+      ]
+    ],
+    "func": "if (flow.get(\"auto\") || flow.get(\"paro\")) return null;\nreturn msg;"
+  },
+  {
+    "id": "ae3_lo_m_cnc",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ CNC",
+    "mode": "link",
+    "links": [
+      "ae3_li_cnc"
+    ],
+    "x": 640,
+    "y": 1290,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_sw_m_refri",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "Refri Manual",
+    "label": "Refrigeración Manual (HR18)",
+    "group": "ae3_ui_g_panel",
+    "order": 7,
+    "width": 3,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "1",
+    "onvalueType": "num",
+    "offvalue": "0",
+    "offvalueType": "num",
+    "x": 220,
+    "y": 1350,
+    "wires": [
+      [
+        "ae3_fn_gate_refri"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_gate_refri",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Solo Manual",
+    "outputs": 1,
+    "x": 460,
+    "y": 1350,
+    "wires": [
+      [
+        "ae3_lo_m_refri"
+      ]
+    ],
+    "func": "if (flow.get(\"auto\")) return null;\nreturn msg;"
+  },
+  {
+    "id": "ae3_lo_m_refri",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ Refri",
+    "mode": "link",
+    "links": [
+      "ae3_li_refri"
+    ],
+    "x": 640,
+    "y": 1350,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_i_avance",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← init",
+    "links": [
+      "ae3_lo_i_avance"
+    ],
+    "x": 70,
+    "y": 1410,
+    "wires": [
+      [
+        "ae3_ui_slider_avance"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_slider_avance",
+    "type": "ui-slider",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_panel",
+    "name": "Avance %",
+    "label": "Velocidad Avance CNC % (ESP32 B HR0)",
+    "order": 9,
+    "width": 6,
+    "height": 1,
+    "passthru": false,
+    "outs": "end",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "thumbLabel": true,
+    "x": 220,
+    "y": 1410,
+    "wires": [
+      [
+        "ae3_mb_w_sim_avance"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_mb_w_sim_avance",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "Simular Avance (ESP32 B HR0)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "server": "esp32_b_cli",
+    "x": 490,
+    "y": 1410,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_li_i_ldr",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← init",
+    "links": [
+      "ae3_lo_i_ldr"
+    ],
+    "x": 70,
+    "y": 1470,
+    "wires": [
+      [
+        "ae3_ui_slider_ldr"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_slider_ldr",
+    "type": "ui-slider",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_panel",
+    "name": "Luz LDR %",
+    "label": "Sensor Luz Banda % (ESP32 A HR0)",
+    "order": 10,
+    "width": 6,
+    "height": 1,
+    "passthru": false,
+    "outs": "end",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "thumbLabel": true,
+    "x": 220,
+    "y": 1470,
+    "wires": [
+      [
+        "ae3_mb_w_sim_ldr"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_mb_w_sim_ldr",
+    "type": "modbus-write",
+    "z": "ae3_tab",
+    "name": "Simular LDR (ESP32 A HR0)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "server": "esp32_a_cli",
+    "x": 490,
+    "y": 1470,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae3_c_4",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "4. TELEOPERACIÓN Y ALARMAS (ACK)",
+    "info": "",
+    "x": 165,
+    "y": 1540,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_i_remoto",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← init",
+    "links": [
+      "ae3_lo_i_remoto"
+    ],
+    "x": 70,
+    "y": 1595,
+    "wires": [
+      [
+        "ae3_ui_sw_remoto"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_sw_remoto",
+    "type": "ui-switch",
+    "z": "ae3_tab",
+    "name": "Modo Remoto",
+    "label": "Modo Remoto (ON = permite órdenes a distancia)",
+    "group": "ae3_ui_g_teleop",
+    "order": 1,
+    "width": 6,
+    "height": 1,
+    "passthru": false,
+    "onvalue": "true",
+    "onvalueType": "bool",
+    "offvalue": "false",
+    "offvalueType": "bool",
+    "x": 220,
+    "y": 1595,
+    "wires": [
+      [
+        "ae3_fn_modo_remoto"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_modo_remoto",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Guardar modo",
+    "outputs": 1,
+    "x": 460,
+    "y": 1595,
+    "wires": [
+      [
+        "ae3_lo_txtrem1"
+      ]
+    ],
+    "func": "const rem = msg.payload === true;\nflow.set(\"remoto\", rem);\nif (!rem) flow.set(\"remoto_cnc\", null);\nreturn { payload: rem ? \"Modo REMOTO: pulse 1. Habilitar (10s) y luego 2. Encender CNC\" : \"En LOCAL: active Modo Remoto para operar a distancia\" };"
+  },
+  {
+    "id": "ae3_lo_txtrem1",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ TxtRemoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_txtrem"
+    ],
+    "x": 640,
+    "y": 1595,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_btn_hab",
+    "type": "ui-button",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "name": "Habilitar",
+    "label": "1. Habilitar (10s)",
+    "order": 2,
+    "width": 2,
+    "height": 1,
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "1",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#0284c7",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "passthru": false,
+    "x": 220,
+    "y": 1655,
+    "wires": [
+      [
+        "ae3_fn_hab"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_hab",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Habilitar 10s",
+    "outputs": 1,
+    "x": 460,
+    "y": 1655,
+    "wires": [
+      [
+        "ae3_lo_txtrem2"
+      ]
+    ],
+    "func": "flow.set(\"habilitado\", true);\nsetTimeout(() => flow.set(\"habilitado\", false), 10000);\nreturn { payload: \"Habilitado por 10 s -> pulse 2. Encender CNC\" };"
+  },
+  {
+    "id": "ae3_lo_txtrem2",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ TxtRemoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_txtrem"
+    ],
+    "x": 640,
+    "y": 1655,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_btn_ejec",
+    "type": "ui-button",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "name": "Ejecutar",
+    "label": "2. Encender CNC",
+    "order": 3,
+    "width": 2,
+    "height": 1,
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "1",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#2e7d32",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "passthru": false,
+    "x": 220,
+    "y": 1730,
+    "wires": [
+      [
+        "ae3_fn_orden_remota"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_orden_remota",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Orden remota",
+    "outputs": 3,
+    "x": 460,
+    "y": 1730,
+    "wires": [
+      [
+        "ae3_lo_rem_cnc1"
+      ],
+      [
+        "ae3_lo_sql_1"
+      ],
+      [
+        "ae3_lo_txtrem3"
+      ]
+    ],
+    "func": "const s = flow.get(\"sensores\") || {};\nconst commOk = (Date.now() - (flow.get(\"ultimo_hr7_ts\") || 0)) <= 5000;\nlet res = \"aceptada\";\nif (!commOk)                      res = \"rechazada: sin comunicacion\";\nelse if (flow.get(\"paro\"))        res = \"rechazada: paro de emergencia\";\nelse if (!flow.get(\"remoto\"))     res = \"rechazada: modo local\";\nelse if (!flow.get(\"habilitado\")) res = \"rechazada: sin habilitar\";\nelse if (s.temp_husillo_C > 70)   res = \"rechazada: interbloqueo (temp > 70 °C)\";\n\nflow.set(\"habilitado\", false);\nif (res === \"aceptada\") flow.set(\"remoto_cnc\", 1);\nconst ev = { topic: `INSERT INTO eventos (ts, origen, accion, resultado) VALUES (datetime('now','localtime'), 'dashboard', 'encender cnc_on', '${res}')` };\nreturn [res === \"aceptada\" ? { payload: 1 } : null, ev, { payload: res }];"
+  },
+  {
+    "id": "ae3_lo_rem_cnc1",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ CNC",
+    "mode": "link",
+    "links": [
+      "ae3_li_cnc"
+    ],
+    "x": 640,
+    "y": 1700,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_sql_1",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ SQLite",
+    "mode": "link",
+    "links": [
+      "ae3_li_sqlite"
+    ],
+    "x": 640,
+    "y": 1730,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_txtrem3",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ TxtRemoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_txtrem"
+    ],
+    "x": 640,
+    "y": 1760,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_btn_detener",
+    "type": "ui-button",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "name": "Detener",
+    "label": "Detener CNC (0)",
+    "order": 4,
+    "width": 2,
+    "height": 1,
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "1",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#c62828",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "passthru": false,
+    "x": 220,
+    "y": 1825,
+    "wires": [
+      [
+        "ae3_fn_parar_remota"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_parar_remota",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Parar orden",
+    "outputs": 3,
+    "x": 460,
+    "y": 1825,
+    "wires": [
+      [
+        "ae3_lo_rem_cnc0"
+      ],
+      [
+        "ae3_lo_sql_2"
+      ],
+      [
+        "ae3_lo_txtrem4"
+      ]
+    ],
+    "func": "flow.set(\"remoto_cnc\", null);\nreturn [{ payload: 0 }, { topic: \"INSERT INTO eventos (ts, origen, accion, resultado) VALUES (datetime('now','localtime'), 'dashboard', 'detener', 'aceptada')\" }, { payload: \"detener: aceptada (control devuelto)\" }];"
+  },
+  {
+    "id": "ae3_lo_rem_cnc0",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ CNC",
+    "mode": "link",
+    "links": [
+      "ae3_li_cnc"
+    ],
+    "x": 640,
+    "y": 1795,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_sql_2",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ SQLite",
+    "mode": "link",
+    "links": [
+      "ae3_li_sqlite"
+    ],
+    "x": 640,
+    "y": 1825,
+    "wires": []
+  },
+  {
+    "id": "ae3_lo_txtrem4",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ TxtRemoto",
+    "mode": "link",
+    "links": [
+      "ae3_li_txtrem"
+    ],
+    "x": 640,
+    "y": 1855,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_txtrem",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← TxtRemoto",
+    "links": [
+      "ae3_lo_i_txtrem",
+      "ae3_lo_txtrem1",
+      "ae3_lo_txtrem2",
+      "ae3_lo_txtrem3",
+      "ae3_lo_txtrem4"
+    ],
+    "x": 460,
+    "y": 1905,
+    "wires": [
+      [
+        "ae3_ui_txt_res_remoto"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_ui_txt_res_remoto",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "order": 5,
+    "width": 6,
+    "height": 1,
+    "name": "Teleoperación CNC",
+    "label": "Teleoperación CNC (HR17)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 680,
+    "y": 1905,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_sens_alm",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Sensores",
+    "links": [
+      "ae3_lo_sensores"
+    ],
+    "x": 220,
+    "y": 1965,
+    "wires": [
+      [
+        "ae3_fn_alarma_ack"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_alarma_ack",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Alarma ACK",
+    "outputs": 2,
+    "x": 460,
+    "y": 1965,
+    "wires": [
+      [
+        "ae3_ui_txt_alarma_ack"
+      ],
+      [
+        "ae3_lo_sql_3"
+      ]
+    ],
+    "func": "const v = msg.payload.temp_husillo_C;\nconst activo = v > 72 ? \"HH\" : (v > 65 ? \"H\" : null);\nlet al = flow.get(\"alarma\") || { estado: \"normal\", tipo: null };\nconst antes = al.estado + \"/\" + al.tipo;\n\nif (activo) {\n    if (al.estado === \"normal\" || al.estado === \"normalizada_sin_reconocer\" || al.tipo !== activo) {\n        al = { estado: \"sin_reconocer\", tipo: activo };\n    }\n} else {\n    if (al.estado === \"reconocida\") al = { estado: \"normal\", tipo: null };\n    else if (al.estado === \"sin_reconocer\") al = { estado: \"normalizada_sin_reconocer\", tipo: al.tipo };\n}\nflow.set(\"alarma\", al);\n\nconst texto = { payload: \"Alarma: \" + al.estado + (al.tipo ? \" (\" + al.tipo + \")\" : \"\") };\nconst cambio = (al.estado + \"/\" + al.tipo) !== antes;\nconst reg = cambio ? { topic: `INSERT INTO alarmas (ts, variable, tipo, estado) VALUES (datetime('now','localtime'), 'temp_husillo_C', '${al.tipo || \"-\"}', '${al.estado}')` } : null;\nreturn [texto, reg];"
+  },
+  {
+    "id": "ae3_lo_sql_3",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ SQLite",
+    "mode": "link",
+    "links": [
+      "ae3_li_sqlite"
+    ],
+    "x": 660,
+    "y": 2005,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_txt_alarma_ack",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "order": 6,
+    "width": 4,
+    "height": 1,
+    "name": "Alarma Térmica",
+    "label": "Alarma Térmica (H>65 / HH>72)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 700,
+    "y": 1965,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_btn_ack",
+    "type": "ui-button",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_teleop",
+    "name": "ACK",
+    "label": "Confirmar (ACK)",
+    "order": 7,
+    "width": 2,
+    "height": 1,
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "1",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#f9a825",
+    "textColor": "#000000",
+    "iconColor": "",
+    "enableClick": true,
+    "passthru": false,
+    "x": 220,
+    "y": 2040,
+    "wires": [
+      [
+        "ae3_fn_ack"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_ack",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Reconocer",
+    "outputs": 2,
+    "x": 460,
+    "y": 2040,
+    "wires": [
+      [
+        "ae3_ui_txt_alarma_ack"
+      ],
+      [
+        "ae3_lo_sql_4"
+      ]
+    ],
+    "func": "let al = flow.get(\"alarma\") || { estado: \"normal\", tipo: null };\nif (al.estado === \"sin_reconocer\") al.estado = \"reconocida\";\nelse if (al.estado === \"normalizada_sin_reconocer\") al = { estado: \"normal\", tipo: null };\nelse return null;\nflow.set(\"alarma\", al);\nreturn [\n    { payload: \"Alarma: \" + al.estado + (al.tipo ? \" (\" + al.tipo + \")\" : \"\") },\n    { topic: `INSERT INTO alarmas (ts, variable, tipo, estado) VALUES (datetime('now','localtime'), 'ACK', '${al.tipo || \"-\"}', '${al.estado}')` }\n];"
+  },
+  {
+    "id": "ae3_lo_sql_4",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ SQLite",
+    "mode": "link",
+    "links": [
+      "ae3_li_sqlite"
+    ],
+    "x": 660,
+    "y": 2055,
+    "wires": []
+  },
+  {
+    "id": "ae3_c_5",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "5. HISTÓRICO SQLITE (planta.db)",
+    "info": "",
+    "x": 160,
+    "y": 2115,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_sqlite",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Eventos / Alarmas",
+    "links": [
+      "ae3_lo_sql_1",
+      "ae3_lo_sql_2",
+      "ae3_lo_sql_3",
+      "ae3_lo_sql_4"
+    ],
+    "x": 380,
+    "y": 2150,
+    "wires": [
+      [
+        "ae3_sqlite_write"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_inj_init_db",
+    "type": "inject",
+    "z": "ae3_tab",
+    "name": "Crear tablas",
+    "once": true,
+    "onceDelay": "0.2",
+    "payloadType": "date",
+    "x": 160,
+    "y": 2200,
+    "wires": [
+      [
+        "ae3_fn_crear_tablas"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_crear_tablas",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Crear tablas",
+    "outputs": 1,
+    "x": 380,
+    "y": 2200,
+    "wires": [
+      [
+        "ae3_sqlite_write"
+      ]
+    ],
+    "func": "return [[\n  { topic: \"CREATE TABLE IF NOT EXISTS lecturas (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT NOT NULL, variable TEXT NOT NULL, valor REAL NOT NULL)\" },\n  { topic: \"CREATE TABLE IF NOT EXISTS eventos (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, origen TEXT, accion TEXT, resultado TEXT)\" },\n  { topic: \"CREATE TABLE IF NOT EXISTS alarmas (id INTEGER PRIMARY KEY AUTOINCREMENT, ts TEXT, variable TEXT, tipo TEXT, estado TEXT)\" }\n]];"
+  },
+  {
+    "id": "ae3_inj_1s_db",
+    "type": "inject",
+    "z": "ae3_tab",
+    "name": "Cada 1s",
+    "repeat": "1",
+    "once": true,
+    "onceDelay": "1",
+    "payloadType": "date",
+    "x": 160,
+    "y": 2255,
+    "wires": [
+      [
+        "ae3_fn_guardar_lectura",
+        "ae3_lo_tick1s"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_guardar_lectura",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Guardar lectura",
+    "outputs": 1,
+    "x": 380,
+    "y": 2255,
+    "wires": [
+      [
+        "ae3_sqlite_write"
+      ]
+    ],
+    "func": "const s = flow.get(\"sensores\");\nif (!s || isNaN(s.temp_husillo_C)) return null;\nreturn { topic: `INSERT INTO lecturas (ts, variable, valor) VALUES (datetime('now','localtime'), 'temp_husillo_C', ${s.temp_husillo_C})` };"
+  },
+  {
+    "id": "ae3_lo_tick1s",
+    "type": "link out",
+    "z": "ae3_tab",
+    "name": "→ Mantenimiento (1s)",
+    "mode": "link",
+    "links": [
+      "ae3_li_tick_uso",
+      "ae3_li_tick_pred"
+    ],
+    "x": 380,
+    "y": 2300,
+    "wires": []
+  },
+  {
+    "id": "ae3_sqlite_write",
+    "type": "sqlite",
+    "z": "ae3_tab",
+    "mydb": "ae3_sqlite_db",
+    "sqlquery": "msg.topic",
+    "name": "planta.db (guardar)",
+    "x": 680,
+    "y": 2200,
+    "wires": [
+      []
+    ]
+  },
+  {
+    "id": "ae3_inj_hist",
+    "type": "inject",
+    "z": "ae3_tab",
+    "name": "Cada 10s",
+    "repeat": "10",
+    "once": true,
+    "onceDelay": "2",
+    "payloadType": "date",
+    "x": 160,
+    "y": 2350,
+    "wires": [
+      [
+        "ae3_fn_q_hist"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_q_hist",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Consulta histórico",
+    "outputs": 1,
+    "x": 380,
+    "y": 2350,
+    "wires": [
+      [
+        "ae3_sqlite_read"
+      ]
+    ],
+    "func": "return { topic: \"SELECT ROUND(AVG(valor),1) AS promedio, ROUND(MAX(valor),1) AS maximo, ROUND(MIN(valor),1) AS minimo FROM lecturas WHERE variable='temp_husillo_C' AND ts >= datetime('now','localtime','-1 hour')\" };"
+  },
+  {
+    "id": "ae3_sqlite_read",
+    "type": "sqlite",
+    "z": "ae3_tab",
+    "mydb": "ae3_sqlite_db",
+    "sqlquery": "msg.topic",
+    "name": "planta.db (consultar)",
+    "x": 660,
+    "y": 2350,
+    "wires": [
+      [
+        "ae3_fn_fmt_hist"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_fmt_hist",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Formato",
+    "outputs": 1,
+    "x": 880,
+    "y": 2350,
+    "wires": [
+      [
+        "ae3_ui_txt_hist"
+      ]
+    ],
+    "func": "const f = (msg.payload && msg.payload[0]) || {};\nmsg.payload = (f.promedio != null) ? `Última hora → Promedio ${f.promedio} | Máx ${f.maximo} | Mín ${f.minimo}` : \"Reuniendo lecturas...\";\nreturn msg;"
+  },
+  {
+    "id": "ae3_ui_txt_hist",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "order": 5,
+    "width": 6,
+    "height": 1,
+    "name": "Histórico SQLite (1h)",
+    "label": "Histórico SQLite (1h)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 1100,
+    "y": 2350,
+    "wires": []
+  },
+  {
+    "id": "ae3_c_6",
+    "type": "comment",
+    "z": "ae3_tab",
+    "name": "6. MANTENIMIENTO RCM Y TENDENCIA PREDICTIVA",
+    "info": "",
+    "x": 195,
+    "y": 2415,
+    "wires": []
+  },
+  {
+    "id": "ae3_li_tick_uso",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Cada 1s",
+    "links": [
+      "ae3_lo_tick1s"
+    ],
+    "x": 160,
+    "y": 2465,
+    "wires": [
+      [
+        "ae3_fn_contar_uso"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_contar_uso",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Contar uso",
+    "outputs": 1,
+    "x": 380,
+    "y": 2465,
+    "wires": [
+      [
+        "ae3_ui_txt_mant"
+      ]
+    ],
+    "func": "let seg = flow.get(\"seg_uso\", \"file\") || 0;\nif (flow.get(\"cnc_on\") === true) seg++;\nflow.set(\"seg_uso\", seg, \"file\");\nreturn { payload: `Uso: ${seg} s | Mantenimiento: ${seg >= 60 ? \"PENDIENTE\" : \"al día\"}` };"
+  },
+  {
+    "id": "ae3_ui_txt_mant",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_mant",
+    "order": 1,
+    "width": 4,
+    "height": 1,
+    "name": "Mantenimiento Husillo",
+    "label": "Mantenimiento Husillo (RCM)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 680,
+    "y": 2465,
+    "wires": []
+  },
+  {
+    "id": "ae3_ui_btn_mant_ok",
+    "type": "ui-button",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_mant",
+    "name": "Registrar Mant.",
+    "label": "Registrar Mant.",
+    "order": 2,
+    "width": 2,
+    "height": 1,
+    "emulateClick": false,
+    "tooltip": "",
+    "color": "",
+    "bgcolor": "",
+    "className": "",
+    "icon": "",
+    "iconPosition": "left",
+    "payload": "1",
+    "payloadType": "str",
+    "topic": "topic",
+    "topicType": "msg",
+    "buttonColor": "#004e5b",
+    "textColor": "#ffffff",
+    "iconColor": "",
+    "enableClick": true,
+    "passthru": false,
+    "x": 160,
+    "y": 2520,
+    "wires": [
+      [
+        "ae3_fn_reset_mant"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_reset_mant",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Reset uso",
+    "outputs": 1,
+    "x": 380,
+    "y": 2520,
+    "wires": [
+      [
+        "ae3_ui_txt_mant"
+      ]
+    ],
+    "func": "flow.set(\"seg_uso\", 0, \"file\");\nreturn { payload: \"Uso: 0 s | Mantenimiento: al día\" };"
+  },
+  {
+    "id": "ae3_li_tick_pred",
+    "type": "link in",
+    "z": "ae3_tab",
+    "name": "← Cada 1s",
+    "links": [
+      "ae3_lo_tick1s"
+    ],
+    "x": 160,
+    "y": 2580,
+    "wires": [
+      [
+        "ae3_fn_tendencia_pred"
+      ]
+    ]
+  },
+  {
+    "id": "ae3_fn_tendencia_pred",
+    "type": "function",
+    "z": "ae3_tab",
+    "name": "Tendencia (Predictivo)",
+    "outputs": 1,
+    "x": 380,
+    "y": 2580,
+    "wires": [
+      [
+        "ae3_ui_txt_pred"
+      ]
+    ],
+    "func": "const s = flow.get(\"sensores\");\nif (!s) return null;\nlet h = context.get(\"hist\") || [];\nh.push(s.temp_husillo_C);\nif (h.length > 20) h.shift();\ncontext.set(\"hist\", h);\nif (h.length < 20) return { payload: `Reuniendo datos (${h.length}/20)...` };\nconst a = h.slice(0, 10).reduce((x, y) => x + y, 0) / 10;\nconst b = h.slice(10).reduce((x, y) => x + y, 0) / 10;\nconst sube = b - a;\nconst avisar = sube > 2 && b > 50;\nreturn { payload: `Tendencia: ${sube > 0 ? \"+\" : \"\"}${sube.toFixed(2)} | ${avisar ? \"AVISO: sube rápido, revisar\" : \"estable\"}` };"
+  },
+  {
+    "id": "ae3_ui_txt_pred",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_mant",
+    "order": 3,
+    "width": 6,
+    "height": 1,
+    "name": "Análisis Predictivo",
+    "label": "Análisis Predictivo (Tendencia)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 680,
+    "y": 2580,
+    "wires": []
+  },
+  {
+    "id": "ae2_tab",
+    "type": "tab",
+    "label": "AE2 - Banda y CNC",
+    "disabled": true,
+    "info": "Flujo exacto de AE2_Practica_A_Banda_CNC_Dia2.html (solo ESP32 A y B). Deshabilitado por defecto para no interferir con la pestaña 'Gemelo' del AE3; habilítalo si deseas probar solo AE2."
+  },
+  {
+    "id": "ae2_mb_read_a",
+    "type": "modbus-read",
+    "z": "ae2_tab",
+    "name": "Leer ESP32 A (HR0 LDR)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_a_cli",
+    "x": 160,
+    "y": 100,
+    "wires": [
+      [
+        "ae2_chg_banda"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae2_chg_banda",
+    "type": "change",
+    "z": "ae2_tab",
+    "name": "topic = banda",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "banda",
+        "tot": "str"
+      }
+    ],
+    "x": 380,
+    "y": 100,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_mb_read_b",
+    "type": "modbus-read",
+    "z": "ae2_tab",
+    "name": "Leer ESP32 B (HR0 Avance)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "0",
+    "quantity": "1",
+    "rate": "500",
+    "rateUnit": "ms",
+    "server": "esp32_b_cli",
+    "x": 170,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_chg_avance"
+      ],
+      []
+    ]
+  },
+  {
+    "id": "ae2_chg_avance",
+    "type": "change",
+    "z": "ae2_tab",
+    "name": "topic = avance",
+    "rules": [
+      {
+        "t": "set",
+        "p": "payload",
+        "pt": "msg",
+        "to": "payload[0]",
+        "tot": "msg"
+      },
+      {
+        "t": "set",
+        "p": "topic",
+        "pt": "msg",
+        "to": "avance",
+        "tot": "str"
+      }
+    ],
+    "x": 380,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_inj_tick",
+    "type": "inject",
+    "z": "ae2_tab",
+    "name": "Reloj 0.5s (tick)",
+    "repeat": "0.5",
+    "once": true,
+    "onceDelay": "0.5",
+    "topic": "tick",
+    "payload": "",
+    "payloadType": "date",
+    "x": 160,
+    "y": 220,
+    "wires": [
+      [
+        "ae2_fn_secuencia"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_fn_secuencia",
+    "type": "function",
+    "z": "ae2_tab",
+    "name": "Secuencia AE2 (Banda 3s -> CNC 2s+avance/10)",
+    "func": "let estado = flow.get(\"celda_ae2\") || {\n    fase: \"reposo\", avance: 50, inicioFase: null, duracionCNC: 0,\n    piezasTerminadas: 0, alarma: false\n};\n\nif (msg.topic === \"banda\") {\n    let luz = Number(msg.payload);\n    if (estado.fase === \"reposo\" && Number.isFinite(luz) && luz < 40) {\n        estado.fase = \"enBanda\";\n        estado.inicioFase = Date.now();\n    }\n} else if (msg.topic === \"avance\") {\n    let v = Number(msg.payload);\n    if (Number.isFinite(v)) estado.avance = v;\n} else if (msg.topic === \"tick\") {\n    let ahora = Date.now();\n    if (estado.fase === \"enBanda\" && ahora - estado.inicioFase >= 3000) {\n        estado.fase = \"enCNC\";\n        estado.inicioFase = ahora;\n        estado.duracionCNC = 2000 + (estado.avance / 10) * 1000;\n    } else if (estado.fase === \"enCNC\" && ahora - estado.inicioFase >= estado.duracionCNC) {\n        estado.fase = \"reposo\";\n        estado.piezasTerminadas++;\n        estado.inicioFase = null;\n    }\n    estado.alarma = estado.fase === \"enCNC\" && (ahora - estado.inicioFase >= 12000);\n}\n\nflow.set(\"celda_ae2\", estado);\n\nreturn [\n    { payload: estado.fase === \"enBanda\" ? 1 : 0 },\n    { payload: estado.fase === \"enCNC\" ? 1 : 0 },\n    { payload: `Fase: ${estado.fase} | Banda: ${estado.fase === \"enBanda\" ? \"ON\" : \"OFF\"} | CNC: ${estado.fase === \"enCNC\" ? \"ON\" : \"OFF\"} | Avance: ${estado.avance}% | Piezas: ${estado.piezasTerminadas} | Alarma: ${estado.alarma ? \"ATASCO (>12s)\" : \"Normal\"}` }\n];",
+    "outputs": 3,
+    "x": 650,
+    "y": 160,
+    "wires": [
+      [
+        "ae2_mb_w_a"
+      ],
+      [
+        "ae2_mb_w_b"
+      ],
+      [
+        "ae2_dbg"
+      ]
+    ]
+  },
+  {
+    "id": "ae2_mb_w_a",
+    "type": "modbus-write",
+    "z": "ae2_tab",
+    "name": "Escribir LED Banda (ESP32 A HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_a_cli",
+    "x": 960,
+    "y": 100,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae2_mb_w_b",
+    "type": "modbus-write",
+    "z": "ae2_tab",
+    "name": "Escribir LED CNC (ESP32 B HR1)",
+    "unitid": "1",
+    "dataType": "HoldingRegister",
+    "adr": "1",
+    "quantity": "1",
+    "server": "esp32_b_cli",
+    "x": 950,
+    "y": 160,
+    "wires": [
+      [],
+      []
+    ]
+  },
+  {
+    "id": "ae2_dbg",
+    "type": "debug",
+    "z": "ae2_tab",
+    "name": "Debug AE2",
+    "active": true,
+    "complete": "payload",
+    "targetType": "msg",
+    "x": 910,
+    "y": 220,
+    "wires": []
+  }
+]

@@ -1,0 +1,32 @@
+# Documentación y entregables duplicados
+docs/
+archivos_originales_zip/
+proyecto_final/
+*.md
+*.txt
+*.pdf
+*.docx
+*.pptx
+*.html
+
+# Secretos y entorno local
+.env
+
+# Bases de datos y estado en ejecución
+*.db
+*.db-journal
+*.sqlite
+nodered/data/context/
+nodered/data/.config.*
+nodered/data/*.backup
+nodered/data/flows_cred.json
+
+# Dependencias y cachés
+node_modules/
+**/node_modules/
+__pycache__/
+*.pyc
+nodered/data/package-lock.json
+
+# Referencia de otra planta
+nodered/Flujo_G7_planta6_Invernadero_referencia.json
