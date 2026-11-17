@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     container_name: dsa_ae3_nodered
     restart: unless-stopped
+    mem_limit: 256m
+    cpus: 0.75
     ports:
       - "${NODERED_PORT:-1880}:1880"
       - "${GEMELO_PORT:-5020}:5020"
@@ -13,6 +15,12 @@ services:
     environment:
       - TZ=America/Bogota
       - NODE_RED_ENABLE_PROJECTS=false
+      - NODE_OPTIONS=--max-old-space-size=192
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
     volumes:
       - ./nodered/data:/data
 
@@ -22,28 +30,17 @@ services:
       dockerfile: Dockerfile
     container_name: dsa_ae3_gemelo
     restart: unless-stopped
-    # Comparte la red con nodered para que 127.0.0.1:5020 funcione idéntico a las guías del curso
+    mem_limit: 96m
+    cpus: 0.50
+    # Comparte la red con nodered: 127.0.0.1:5020 (Gemelo), 5021 (ESP32 A) y 5022 (ESP32 B)
     network_mode: "service:nodered"
     depends_on:
       - nodered
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
     command: >
-      python -u planta_gemela.py
-      --planta ${PLANTA:-1}
-      --puerto 5020
-      --dt 0.25
-      --vel ${VELOCIDAD:-1.0}
-
-  esp32-sim:
-    build:
-      context: ./gemelo
-      dockerfile: Dockerfile
-    container_name: dsa_ae3_esp32_sim
-    restart: unless-stopped
-    # Comparte la red con nodered: ESP32 A en 127.0.0.1:5021 y ESP32 B en 127.0.0.1:5022
-    network_mode: "service:nodered"
-    depends_on:
-      - nodered
-    command: >
-      python -u simulador_esp32.py
-      --puerto-a 5021
-      --puerto-b 5022
+      sh -c "python -u simulador_esp32.py --puerto-a 5021 --puerto-b 5022 &
+      exec python -u planta_gemela.py --planta ${PLANTA:-1} --puerto 5020 --dt 0.25 --vel ${VELOCIDAD:-1.0}"
