@@ -346,9 +346,29 @@
     "x": 360,
     "y": 415,
     "wires": [
-      []
+      [
+        "ae3_ui_txt_esp32a"
+      ]
     ],
-    "func": "const r = msg.payload.data || msg.payload;\nif (Array.isArray(r) && r.length >= 3) { flow.set(\"ldr\", Number(r[0])); flow.set(\"paro\", Number(r[2]) === 1); }\nreturn null;"
+    "func": "const r = msg.payload.data || msg.payload;\nif (!Array.isArray(r) || r.length < 3) return null;\nconst ldr = Number(r[0]);\nconst paro = Number(r[2]) === 1;\nflow.set(\"ldr\", ldr);\nflow.set(\"paro\", paro);\nreturn { payload: `LDR: ${ldr}% | Paro: ${paro ? \"ACTIVO\" : \"OK\"}` };"
+  },
+  {
+    "id": "ae3_ui_txt_esp32a",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "order": 7,
+    "width": 3,
+    "height": 1,
+    "name": "ESP32 A (LDR/Paro)",
+    "label": "ESP32 A (Banda)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 890,
+    "y": 485,
+    "wires": []
   },
   {
     "id": "ae3_mb_read_esp32b",
@@ -380,9 +400,29 @@
     "x": 360,
     "y": 475,
     "wires": [
-      []
+      [
+        "ae3_ui_txt_esp32b"
+      ]
     ],
-    "func": "const r = msg.payload.data || msg.payload;\nif (Array.isArray(r) && r.length >= 1) flow.set(\"avance\", Number(r[0]));\nreturn null;"
+    "func": "const r = msg.payload.data || msg.payload;\nif (!Array.isArray(r) || r.length < 1) return null;\nconst av = Number(r[0]);\nflow.set(\"avance\", av);\nreturn { payload: `Avance: ${av}% (t=${(2 + av / 10).toFixed(1)} s)` };"
+  },
+  {
+    "id": "ae3_ui_txt_esp32b",
+    "type": "ui-text",
+    "z": "ae3_tab",
+    "group": "ae3_ui_g_sensores",
+    "order": 8,
+    "width": 3,
+    "height": 1,
+    "name": "ESP32 B (Pot)",
+    "label": "ESP32 B (CNC)",
+    "format": "{{msg.payload}}",
+    "layout": "row-spread",
+    "value": "payload",
+    "valueType": "msg",
+    "x": 890,
+    "y": 530,
+    "wires": []
   },
   {
     "id": "ae3_fn_escalar",
