@@ -26,9 +26,9 @@ if %ERRORLEVEL% NEQ 0 (
     podman machine start >nul 2>nul
 )
 
-echo [2/4] Construyendo imágenes con Podman...
-podman build -t dsa-ae3-nodered ./nodered
+echo [2/4] Construyendo imágenes Alpine ^(Gemelo primero, Node-RED minimal con caché^)...
 podman build -t dsa-ae3-gemelo ./gemelo
+podman build -t dsa-ae3-nodered ./nodered
 
 echo [3/4] Creando Pod compartido "dsa-ae3-pod" ^(comparte 127.0.0.1 entre Node-RED, Gemelo y ESP32 Sim^)...
 podman pod rm -f dsa-ae3-pod >nul 2>nul
